@@ -610,7 +610,7 @@ def main():
     B6 = np.linalg.inv(ECE569_Adjoint(M))@S6
     B = np.array([B1, B2, B3, B4, B5, B6]).T
 
-    theta0 = np.array([-1.6800, -1.4018, -1.8127, -2.9937, -0.8857, -0.0696])
+    theta0 = np.array([np.deg2rad(135), -1.4018, -1.8127, -2.9937, -0.8857, -0.0696])
     
     # perform forward kinematics using ECE569_FKinSpace and ECE569_FKinBody
     # TODO: implement these functions
@@ -708,13 +708,13 @@ def main():
     # by plotting the mu3 manipulability measure
     mu3s = np.zeros(len(t))
     # for i in range(len(t)):
-        # TODO: complete this plot
-        # Jb = ECE569_JacobianBody(...)      # get the body jacobain for thetaAll[:, i]
-        # Jv = ...                           # get the last three rows of Jb
-        # mu3s[i] = np.linalg.det(...)       # compute mu3 = det(Jv Jv^T) using numpy
+        # TODO: fill in this code
+        # Jb = ECE569_JacobianBody(...)          # get the body jacobain for thetaAll[:, i]
+        # Jv = ...                               # get the last three rows of Jb
+        # mu3s[i] = np.sqrt(np.linalg.det(...))  # compute mu3 = sqrt(det(Jv Jv^T)) using numpy
     plt.plot(t, mu3s, '-')
     plt.xlabel('t (seconds)')
-    plt.ylabel(r'$\mu_3 = det(J_v J_v^\top)$')
+    plt.ylabel(r'$\mu_3 = \sqrt{det(J_v J_v^\top)}$')
     plt.title('Manipulability')
     plt.grid()
     plt.tight_layout()

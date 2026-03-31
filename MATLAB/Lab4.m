@@ -89,7 +89,7 @@ B6 = ECE569_Adjoint(M)\S6;
 B = [B1 B2 B3 B4 B5 B6];
 
 % joint angles
-theta0 = [-1.6800   -1.4018   -1.8127   -2.9937   -0.8857   -0.0696]';
+theta0 = [deg2rad(135)   -1.4018   -1.8127   -2.9937   -0.8857   -0.0696]';
 
 % calculate the 4x4 matrix representing the transition
 % from end effector frame {b} to the base frame {s} at t=0: Tsb(0)
@@ -193,9 +193,9 @@ hold off
 %[text] (3e) Verify that the end effector does not enter a kinematic singularity, by plotting the mu3 manipulability measure
 mu3s = zeros(N,1);
 for i=1:N
-    Jb = ...                 % calculate body jacobian for thetaAll(:, i)
-    Jv = ...                 % get the last three rows of Jb
-    mu3s(i) = det(...); % mu3 = det(Jv Jv^T)
+    Jb = ...                  % calculate body jacobian for thetaAll(:, i)
+    Jv = ...                  % get the last three rows of Jb
+    mu3s(i) = sqrt(det(...)); % mu3 = sqrt(det(Jv Jv^T))
 end
 plot(t, mu3s)
 title('Manipulability')
