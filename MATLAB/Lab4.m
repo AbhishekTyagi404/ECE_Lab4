@@ -65,18 +65,37 @@ H1 = 0.1519;
 H2 = 0.0854;
 
 % home position of end effector
-M = [-1 0 0 L1+L2;
-    0 0 1 W1+W2;
+M = [1 0 0 L1+L2;
+    0 0 -1 -W1-W2;
     0 1 0 H1-H2;
     0 0 0 1];
 
+    
+    S1 = np.array([0, 0, 1, 0, 0, 0])
+    S2 = np.array([0, -1, 0, H1, 0, 0])
+    S3 = np.array([0, -1, 0, H1, 0, L1])
+    S4 = np.array([0, -1, 0, H1, 0, L1 + L2])
+    S5 = np.array([0, 0, -1, W1, L1+L2, 0])
+    S6 = np.array([0, -1, 0, H1-H2, 0, L1+L2])
+    S = np.array([S1, S2, S3, S4, S5, S6]).T
+    
+    B1 = np.linalg.inv(ECE569_Adjoint(M))@S1
+    B2 = np.linalg.inv(ECE569_Adjoint(M))@S2
+    B3 = np.linalg.inv(ECE569_Adjoint(M))@S3
+    B4 = np.linalg.inv(ECE569_Adjoint(M))@S4
+    B5 = np.linalg.inv(ECE569_Adjoint(M))@S5
+    B6 = np.linalg.inv(ECE569_Adjoint(M))@S6
+    B = np.array([B1, B2, B3, B4, B5, B6]).T
+
+    theta0 = np.deg2rad(np.array([-51.0, -85.09, -125.84, -149.22, -51.0, 0.0]))
+
 % screw axes
 S1 = [0 0 1 0 0 0]';
-S2 = [0 1 0 -H1 0 0]';
-S3 = [0 1 0 -H1 0 L1]';
-S4 = [0 1 0 -H1 0 L1+L2]';
-S5 = [0 0 -1 -W1 L1+L2 0]';
-S6 = [0 1 0 H2-H1 0 L1+L2]';
+S2 = [0 -1 0 H1 0 0]';
+S3 = [0 -1 0 H1 0 L1]';
+S4 = [0 -1 0 H1 0 L1+L2]';
+S5 = [0 0 -1 W1 L1+L2 0]';
+S6 = [0 -1 0 H1-H2 0 L1+L2]';
 S = [S1 S2 S3 S4 S5 S6];
 
 % body screw axes
@@ -89,7 +108,7 @@ B6 = ECE569_Adjoint(M)\S6;
 B = [B1 B2 B3 B4 B5 B6];
 
 % joint angles
-theta0 = [deg2rad(135)   -1.4018   -1.8127   -2.9937   -0.8857   -0.0696]';
+theta0 = deg2rad([-51.0 -85.09 -125.84 -149.22 -51.0 0.0])';
 
 % calculate the 4x4 matrix representing the transition
 % from end effector frame {b} to the base frame {s} at t=0: Tsb(0)
@@ -120,6 +139,7 @@ zlabel('z (m)')
 hold on
 plot3(xs(1),ys(1),zs(1),'go','MarkerSize',10,'LineWidth',2)
 plot3(xs(end),ys(end),zs(end),'rx','MarkerSize',10,'LineWidth',2)
+axis equal
 legend('Trajectory', 'Start', 'End')
 grid on
 hold off
@@ -179,6 +199,7 @@ xs = actualTsd(1,4,:);
 ys = actualTsd(2,4,:);
 zs = actualTsd(3,4,:);
 plot3(xs(:), ys(:), zs(:), 'LineWidth', 1)
+axis equal
 title('Verified Trajectory \{s\} frame')
 xlabel('x (m)')
 ylabel('y (m)')

@@ -589,17 +589,17 @@ def main():
     H1 = 0.1519
     H2 = 0.0854
 
-    M = np.array([[-1, 0, 0, L1 + L2],
-                  [0, 0, 1, W1 + W2],
+    M = np.array([[1, 0, 0, L1 + L2],
+                  [0, 0, -1, -W1 - W2],
                   [0, 1, 0, H1 - H2],
                   [0, 0, 0, 1]])
     
     S1 = np.array([0, 0, 1, 0, 0, 0])
-    S2 = np.array([0, 1, 0, -H1, 0, 0])
-    S3 = np.array([0, 1, 0, -H1, 0, L1])
-    S4 = np.array([0, 1, 0, -H1, 0, L1 + L2])
-    S5 = np.array([0, 0, -1, -W1, L1+L2, 0])
-    S6 = np.array([0, 1, 0, H2-H1, 0, L1+L2])
+    S2 = np.array([0, -1, 0, H1, 0, 0])
+    S3 = np.array([0, -1, 0, H1, 0, L1])
+    S4 = np.array([0, -1, 0, H1, 0, L1 + L2])
+    S5 = np.array([0, 0, -1, W1, L1+L2, 0])
+    S6 = np.array([0, -1, 0, H1-H2, 0, L1+L2])
     S = np.array([S1, S2, S3, S4, S5, S6]).T
     
     B1 = np.linalg.inv(ECE569_Adjoint(M))@S1
@@ -610,8 +610,8 @@ def main():
     B6 = np.linalg.inv(ECE569_Adjoint(M))@S6
     B = np.array([B1, B2, B3, B4, B5, B6]).T
 
-    theta0 = np.array([np.deg2rad(135), -1.4018, -1.8127, -2.9937, -0.8857, -0.0696])
-    
+    theta0 = np.deg2rad(np.array([-51.0, -85.09, -125.84, -149.22, -51.0, 0.0]))
+
     # perform forward kinematics using ECE569_FKinSpace and ECE569_FKinBody
     # TODO: implement these functions
     T0_space = ECE569_FKinSpace(M, S, theta0)
@@ -635,6 +635,7 @@ def main():
     ax.plot(xs, ys, zs, 'b-',label='p(t)')
     ax.plot(xs[0], ys[0], zs[0], 'go',label='start')
     ax.plot(xs[-1], ys[-1], zs[-1], 'rx',label='end')
+    ax.set_aspect('equal')
     ax.set_title('Trajectory in s frame')
     ax.set_xlabel('x (m)')
     ax.set_ylabel('y (m)')
@@ -697,6 +698,7 @@ def main():
     ax.plot(xs, ys, zs, 'b-',label='p(t)')
     ax.plot(xs[0], ys[0], zs[0], 'go',label='start')
     ax.plot(xs[-1], ys[-1], zs[-1], 'rx',label='end')
+    ax.set_aspect('equal')
     ax.set_xlabel('x (m)')
     ax.set_ylabel('y (m)')
     ax.set_zlabel('z (m)')
