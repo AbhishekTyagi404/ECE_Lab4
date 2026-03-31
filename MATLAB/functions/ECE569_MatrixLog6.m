@@ -21,7 +21,10 @@ omgmat = ECE569_MatrixLog3(R);
 if isequal(omgmat, zeros(3))
     % expmat = ...
 else
-    % theta = ...
+    % theta = acos((trace(R) - 1) / 2);
+    % Note: equation (3.92) of MR is a bit confusing because of how they chose to normalize by theta.
+    % You need to multiply (eqn. 3.92) by theta on both sides to properly implement the MatrixLog6 function. 
+    % In summary, you should have v = (eqn. 3.92) * theta * p
     % expmat = ...
 end
 end

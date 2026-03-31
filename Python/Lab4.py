@@ -328,6 +328,9 @@ def ECE569_MatrixLog6(T):
         # return ...
     else:
         theta = np.arccos((np.trace(R) - 1) / 2.0)
+        # Note: equation (3.92) of MR is a bit confusing because of how they chose to normalize by theta.
+        # You need to multiply (eqn. 3.92) by theta on both sides to properly implement the MatrixLog6 function. 
+        # In summary, you should have v = (eqn. 3.92) * theta * p
         # return ...
 
 
