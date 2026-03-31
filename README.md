@@ -1,6 +1,6 @@
 # Lab 4
 
-Overleaf Assignment Link [here](https://www.overleaf.com/read/xwftfjrkwcqx#de76e1)
+Overleaf Assignment Link [here](https://www.overleaf.com/read/ywtcvwdckmjh#7fa008)
 
 ### Steps 1-3
 For steps 1-3, you can use the MATLAB or Python starter code provided. First, make your own copy personal copy of the Lab 4 repo with the `Use This Template` button. Then, for MATLAB users, you will need to `git clone` this repository onto your personal computer (or download zip file of the repo). If using Python, you have the option of cloning on your personal machine or on eceprog. If using eceprog, please run the `git clone` command from your home directory.
@@ -48,7 +48,7 @@ In the `ws4/src/py_joint_pub/py_joint_pub/joint_publisher_csv.py` file, change l
 Also, copy and paste your `<username>.csv` file into the `ws4/src/py_joint_pub/py_joint_pub/resource` folder.
 A good way to get your CSV file into eceprog is to upload the file to github, and then run `git pull` on eceprog to download the changes back onto eceprog. Then, you can move the `.csv` file to the `resource` folder. It is also possible to use `scp` (secure copy) to transfer the file from your personal computer to eceprog, similar to an ssh tunnel. There are instructions online if you choose to go down this path.
 
-Once your have added your csv file to the `resource` folder, build and source your workspace. Then, run 
+Once your have added your csv file to the `resource` folder, build and source your workspace. (Make sure that you use the `colcon build --symlink-install` option, otherwise the csv files will not be able to be found.) Then, run 
 ```bash
 ros2 launch msee22_description move_robot.launch.py
 ```
