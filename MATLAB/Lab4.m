@@ -70,25 +70,6 @@ M = [1 0 0 L1+L2;
     0 1 0 H1-H2;
     0 0 0 1];
 
-    
-    S1 = np.array([0, 0, 1, 0, 0, 0])
-    S2 = np.array([0, -1, 0, H1, 0, 0])
-    S3 = np.array([0, -1, 0, H1, 0, L1])
-    S4 = np.array([0, -1, 0, H1, 0, L1 + L2])
-    S5 = np.array([0, 0, -1, W1, L1+L2, 0])
-    S6 = np.array([0, -1, 0, H1-H2, 0, L1+L2])
-    S = np.array([S1, S2, S3, S4, S5, S6]).T
-    
-    B1 = np.linalg.inv(ECE569_Adjoint(M))@S1
-    B2 = np.linalg.inv(ECE569_Adjoint(M))@S2
-    B3 = np.linalg.inv(ECE569_Adjoint(M))@S3
-    B4 = np.linalg.inv(ECE569_Adjoint(M))@S4
-    B5 = np.linalg.inv(ECE569_Adjoint(M))@S5
-    B6 = np.linalg.inv(ECE569_Adjoint(M))@S6
-    B = np.array([B1, B2, B3, B4, B5, B6]).T
-
-    theta0 = np.deg2rad(np.array([-51.0, -85.09, -125.84, -149.22, -51.0, 0.0]))
-
 % screw axes
 S1 = [0 0 1 0 0 0]';
 S2 = [0 -1 0 H1 0 0]';
