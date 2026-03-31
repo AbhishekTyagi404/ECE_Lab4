@@ -702,14 +702,16 @@ def main():
     plt.show()
     
     # (3e) verify the robot does not enter kinematic singularity
-    # by plotting the determinant of the body jacobian
-    body_dets = np.zeros(len(t))
+    # by plotting the mu3 manipulability measure
+    mu3s = np.zeros(len(t))
     # for i in range(len(t)):
         # TODO: complete this plot
-        # body_dets[i] = np.linalg.det(...)
-    plt.plot(t, body_dets, '-')
+        # Jb = ECE569_JacobianBody(...)      # get the body jacobain for thetaAll[:, i]
+        # Jv = ...                           # get the last three rows of Jb
+        # mu3s[i] = np.linalg.det(...)       # compute mu3 = det(Jv Jv^T) using numpy
+    plt.plot(t, mu3s, '-')
     plt.xlabel('t (seconds)')
-    plt.ylabel('det of J_B')
+    plt.ylabel(r'$\mu_3 = det(J_v J_v^\top)$')
     plt.title('Manipulability')
     plt.grid()
     plt.tight_layout()

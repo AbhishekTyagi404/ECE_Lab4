@@ -190,16 +190,18 @@ legend('Trajectory', 'Start', 'End')
 grid on
 hold off
 %%
-%[text] (3e) Verify that the end effector does not enter a kinematic singularity, by plotting the determinant of your body jacobian
-body_dets = zeros(N,1);
+%[text] (3e) Verify that the end effector does not enter a kinematic singularity, by plotting the mu3 manipulability measure
+mu3s = zeros(N,1);
 for i=1:N
-    body_dets(i) = det(...);
+    Jb = ...                 % calculate body jacobian for thetaAll(:, i)
+    Jv = ...                 % get the last three rows of Jb
+    mu3s(i) = det(...); % mu3 = det(Jv Jv^T)
 end
-plot(t, body_dets)
+plot(t, mu3s)
 title('Manipulability')
 grid on
 xlabel('time (s)')
-ylabel('det of J_B')
+ylabel('$\mu_3$')
 %%
 %[text] (3f) Save to CSV File
 % you can play with turning the LEDs on and off
