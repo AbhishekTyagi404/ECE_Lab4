@@ -13,7 +13,7 @@ For steps 1-3, you can use the MATLAB or Python starter code provided. First, ma
 
 If you are not using eceprog, you will need to download the UR description package to the `ws4/src` folder.
 ```bash
-cd ~/ece569-spring2026/Lab4/ws4/src
+cd ~/ECE_Lab4/Lab4/ws4/src
 git clone https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
 cd Universal_Robots_ROS2_Description
 ```
@@ -28,7 +28,7 @@ For all students, you will need to first edit `ws4/src/msee22_description/urdf/m
 
 Then, build all packages. If you get an error, look for the Lab 4 update thread on Piazza - there might be a solution already posted there to your particular problem.
 ```bash
-cd ~/ece569-spring2026/ws4/
+cd ~/ECE_Lab4/ws4/
 colcon build --symlink-install
 source install/setup.bash
 ```
