@@ -22,7 +22,7 @@
 
 **Lissajous (Steps 1–4):**  
 `x(t) = 0.12 sin(3t)`,  `y(t) = 0.10 sin(2t)`,  `T = 2π`,  `tfinal = 20 s`  
-Average velocity `c = 0.0868 m/s` — well within 0.25 m/s limit ✅
+Average velocity `c = 0.0868 m/s` — well within 0.25 m/s limit
 
 **Bonus (Step 5):**  
 Heart ♥ symbol using parametric equation  
