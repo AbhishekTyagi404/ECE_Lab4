@@ -22,7 +22,7 @@ class JointPublisherCSV(Node):
         self.i = 0
 
         # ── FIX 1: change filename here ──────────────────────
-        filename = 'tyagi55_bonus_pi.csv'   # ← your bonus CSV
+        filename = 'tyagi55_bonus_heart.csv'   # ← your bonus CSV
         # filename = 'tyagi55.csv'       # ← swap to this for the regular Lissajous
 
         csv_file = pkg_resources.resource_filename(
