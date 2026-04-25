@@ -1,61 +1,126 @@
-# Lab 4
+# Lab 4 — Abhishek Tyagi (`tyagi55`)
 
-Overleaf Assignment Link [here](https://www.overleaf.com/read/ywtcvwdckmjh#7fa008)
+**Student:** Abhishek Tyagi  
+**Purdue Email:** tyagi55@purdue.edu  
+**GitHub:** [github.com/AbhishekTyagi404/ECE_Lab4](https://github.com/AbhishekTyagi404/ECE_Lab4)  
+**Overleaf Report:** [Link](https://www.overleaf.com/read/ywtcvwdckmjh#7fa008)
 
-### Steps 1-3
-For steps 1-3, you can use the MATLAB or Python starter code provided. First, make your own copy personal copy of the Lab 4 repo with the `Use This Template` button. Then, for MATLAB users, you will need to `git clone` this repository onto your personal computer (or download zip file of the repo). If using Python, you have the option of cloning on your personal machine or on eceprog. If using eceprog, please run the `git clone` command from your home directory.
+---
 
+## Submitted Files
 
-### Step 4
+| File | Description |
+|---|---|
+| `Python/Lab4.py` | Completed Lab 4 Python implementation |
+| `Python/Lab4_ECE569.ipynb` | Completed Jupyter notebook |
+| `resource/tyagi55.csv` | Lissajous trajectory CSV (Steps 1–4) |
+| `resource/tyagi55_bonus.csv` | Bonus heart ♥ trajectory CSV (Step 5) |
 
+---
 
-#### Instructions for non-eceprog users
+## Trajectory Summary
 
-If you are not using eceprog, you will need to download the UR description package to the `ws4/src` folder.
+**Lissajous (Steps 1–4):**  
+`x(t) = 0.12 sin(3t)`,  `y(t) = 0.10 sin(2t)`,  `T = 2π`,  `tfinal = 20 s`  
+Average velocity `c = 0.0868 m/s` — well within 0.25 m/s limit ✅
+
+**Bonus (Step 5):**  
+Heart ♥ symbol using parametric equation  
+`x = 16sin³(t)`,  `y = 13cos(t) − 5cos(2t) − 2cos(3t) − cos(4t)`  
+LED on/off feature used — LED=1 during heart stroke, LED=0 during transit moves
+
+---
+
+## Steps 1–3
+
+For steps 1–3, use the MATLAB or Python starter code provided. First, make your own personal copy of the Lab 4 repo with the `Use This Template` button. Then, for MATLAB users, `git clone` the repository onto your personal computer (or download the zip). If using Python, you can clone on your personal machine or on eceprog. If using eceprog, run `git clone` from your home directory.
+
+---
+
+## Step 4 — RViz Verification
+
+### Instructions for non-eceprog users
+
+Download the UR description package to the `ws4/src` folder:
+
 ```bash
-cd ~/ECE_Lab4/Lab4/ws4/src
+cd ~/ECE_Lab4/ws4/src
 git clone https://github.com/UniversalRobots/Universal_Robots_ROS2_Description.git
 cd Universal_Robots_ROS2_Description
 ```
-Then, checkout the `humble` or `jazzy` branch, depending on which version of ROS you are using. For example:
+
+Checkout the `humble` or `jazzy` branch depending on your ROS version:
+
 ```bash
-git checkout origin/humble 
+git checkout origin/humble
 ```
 
-#### Instructions for all users
+### Instructions for all users
 
-For all students, you will need to first edit `ws4/src/msee22_description/urdf/msee22.urdf.xacro` depending on if you use humble or jazzy. Follow the instructions on lines 89 and 95.
+Edit `ws4/src/msee22_description/urdf/msee22.urdf.xacro` for your ROS version (see lines 89 and 95).
 
-Then, build all packages. If you get an error, look for the Lab 4 update thread on Piazza - there might be a solution already posted there to your particular problem.
+Build all packages:
+
 ```bash
 cd ~/ECE_Lab4/ws4/
 colcon build --symlink-install
 source install/setup.bash
 ```
 
-Now, check if you can view the robot on the table.
+Verify the robot appears on the table:
+
 ```bash
 ros2 launch msee22_description view_room.launch.py
 ```
 
-Next, check if the `py_joint_pub` package is working:
+Check the `py_joint_pub` package works:
+
 ```bash
 ros2 launch msee22_description move_robot.launch.py
 ```
 
+### Loading your CSV
 
-In the `ws4/src/py_joint_pub/py_joint_pub/joint_publisher_csv.py` file, change line 18 to your filename. 
-Also, copy and paste your `<username>.csv` file into the `ws4/src/py_joint_pub/py_joint_pub/resource` folder.
-A good way to get your CSV file into eceprog is to upload the file to github, and then run `git pull` on eceprog to download the changes back onto eceprog. Then, you can move the `.csv` file to the `resource` folder. It is also possible to use `scp` (secure copy) to transfer the file from your personal computer to eceprog, similar to an ssh tunnel. There are instructions online if you choose to go down this path.
+1. Copy your CSV file into `ws4/src/py_joint_pub/py_joint_pub/resource/`
+2. In `ws4/src/py_joint_pub/py_joint_pub/joint_publisher_csv.py`, update line 18:
 
-Once your have added your csv file to the `resource` folder, build and source your workspace. (Make sure that you use the `colcon build --symlink-install` option, otherwise the csv files will not be able to be found.) Then, run 
+```python
+filename = 'tyagi55.csv'          # Lissajous trajectory
+# filename = 'tyagi55_bonus.csv'  # ← swap for bonus heart trajectory
+```
+
+3. Make sure your CSV has **no header row**, column order: `time, j1, j2, j3, j4, j5, j6, led`
+
+> **Tip:** Upload your CSV to this GitHub repo, then run `git pull` on eceprog and move the file to the `resource/` folder. Alternatively, use `scp` to transfer directly from your local machine.
+
+4. Rebuild and source, then run:
+
 ```bash
+cd ~/ECE_Lab4/ws4/
+colcon build --symlink-install
+source install/setup.bash
 ros2 launch msee22_description move_robot.launch.py
 ```
-and enable the tool0 trail, and take a screenshot of the trajectory for your lab report.
 
-When you are done verifying that your trajectory is successful, upload the CSV file to the Lab4-CSV assignment on Brightspace with the filename `<your purdue username>.csv`. For example, `ldihel.csv`.
+5. In RViz, enable the **tool0 trail** and take a screenshot for your report.
 
-### Bonus
+6. Upload `tyagi55.csv` to the **Lab4-CSV** assignment on Brightspace.
 
-For the bonus trajectory, also verify that the joint angles in your `<your purdue username>_bonus.csv` file produces acceptable results before submitting to the Lab4-CSV-bonus assignment on Brightspace.
+---
+
+## Step 5 — Bonus
+
+The bonus trajectory draws a **heart ♥** symbol using the robot's LED:
+
+- Generated procedurally in Python using the classic heart parametric equation
+- Local `y` offsets map to global `z` (vertical strokes) — key insight for correct orientation
+- LED=1 during the heart stroke, LED=0 during pen-up transit moves
+- Verified in RViz with no collisions, continuous velocity, and no kinematic singularities (min μ₃ = 0.262)
+
+To run the bonus trajectory, update line 18 in `joint_publisher_csv.py`:
+
+```python
+filename = 'tyagi55_bonus.csv'
+```
+
+Then rebuild and run as above. Upload `tyagi55_bonus.csv` to the **Lab4-CSV-bonus** assignment on Brightspace.
